@@ -1,3 +1,5 @@
 $(document).ready(function() {
-    //$("IMG")
-}).
+    $('img').click(function(){
+    $(this).attr('src',"Images/three-spades.png");
+  });
+});
