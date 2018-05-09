@@ -13,29 +13,48 @@ cards[9] = "Images/five-spades.png";
 cards[10] = "Images/six-spades.png";
 cards[11] = "Images/six-spades.png";
 
-cards = shuffle(cards);
+//cards = shuffle(cards);
 
-$('IMG').each(function(counter) {
+$('#field IMG').each(function(counter) {
     $(this).data('card',cards[counter])
+    $(this).attr('src',$(this).data('card'));
 });
+
+setTimeout(function() {
+                    $('#field IMG').attr("src","Images/back.png")
+                },1500);
 
 $(document).ready(function() {
-    $('IMG').click(function(){
-    $(this).attr('src',$(this).data('card'));
-    $(this).addClass('flipped');
-    if($('.flipped').length > 1) {
-        // check if they match
-        if($('.flipped').eq(0).data('card') == $('.flipped').eq(1).data('card')) {
-            alert('YAY!');
-            //Homework - remove from board 
+    $('#field IMG').click(function(){
+        $(this).attr('src',$(this).data('card'));
+        $(this).addClass('flipped');
+        if($('.flipped').length > 1) {
+            // check if they match
+            if($('.flipped').eq(0).data('card') == $('.flipped').eq(1).data('card')) {
+                $(".flipped").addClass('match');
+                setTimeout(function() {
+                    $(".flipped").hide();
+                    $(".flipped").removeClass("flipped");
+                    checkWin();
+                },600);
+            }
+            else {
+                $(".flipped").addClass('fail');
+                setTimeout(function() {
+                    $('IMG').attr("src","Images/back.png")
+                    $(".flipped").removeClass('fail');
+                    $(".flipped").removeClass("flipped");
+                },600);
+            }
         }
-        else {
-            alert('NAY!');
-            //Homework - flip back over
-        }
-    }
-  });
+    });
 });
+
+function checkWin() {
+    if($("IMG:visible").length == 0) {
+        alert('YOU PUT YOURSELF IN THE MONDAY MILK!')
+    }
+}
 
 function shuffle(array) {
   var currentIndex = array.length, temporaryValue, randomIndex;
@@ -55,3 +74,6 @@ function shuffle(array) {
 
   return array;
 }
+
+// add #field to all references of IMG 
+// homework - make the image disapear and then appear when you win

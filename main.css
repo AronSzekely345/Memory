@@ -1,0 +1,41 @@
+@keyframes winPulse {
+    from {border-color: #040;}
+    to {border-color: #0f0;}
+}
+
+@keyframes failPulse {
+    from {border-color: #400;}
+    to {border-color: #f00;}
+}
+
+IMG{
+    padding: 5px;
+}
+
+.match {
+    border: 3px limegreen solid;
+    border-radius: 7px;
+    
+    animation-name:winPulse;
+    animation-duration:.1s;
+    animation-iteration-count: 6;
+}
+
+.fail {
+    border: 3px red solid;
+    border-radius: 7px;
+    
+    animation-name:failPulse;
+    animation-duration:.1s;
+    animation-iteration-count: 6;
+}
+
+#field > DIV {
+    height:180px;
+}
+
+Yay image id {
+    position: absolute;
+    top: 50px;
+    left: 20%;
+}
