@@ -13,19 +13,13 @@ cards[9] = "Images/five-spades.png";
 cards[10] = "Images/six-spades.png";
 cards[11] = "Images/six-spades.png";
 
-//cards = shuffle(cards);
-
-$('#field IMG').each(function(counter) {
-    $(this).data('card',cards[counter])
-    $(this).attr('src',$(this).data('card'));
-});
-
-setTimeout(function() {
-                    $('#field IMG').attr("src","Images/back.png")
-                },1500);
+resetField();
 
 $(document).ready(function() {
     $('#field IMG').click(function(){
+        if($('.flipped').length > 1) {
+            return false;
+        }
         $(this).attr('src',$(this).data('card'));
         $(this).addClass('flipped');
         if($('.flipped').length > 1) {
@@ -41,7 +35,7 @@ $(document).ready(function() {
             else {
                 $(".flipped").addClass('fail');
                 setTimeout(function() {
-                    $('IMG').attr("src","Images/back.png")
+                    $('#field IMG').attr("src","Images/back.png")
                     $(".flipped").removeClass('fail');
                     $(".flipped").removeClass("flipped");
                 },600);
@@ -51,9 +45,36 @@ $(document).ready(function() {
 });
 
 function checkWin() {
-    if($("IMG:visible").length == 0) {
-        alert('YOU PUT YOURSELF IN THE MONDAY MILK!')
+    if($("#field IMG:visible").length == 0) {
+        $('#winner').show();
+        setTimeout(function() {
+        if(confirm('YOU PUT YOURSELF IN THE MONDAY MILK! Do you wish to continue to the Tuesday Juice?')) {
+            resetField();
+            }
+        }, 1000);  
     }
+}
+
+function resetField() {
+    $('#winner').hide();
+    $('#field IMG').show();
+    $('.flipped').removeClass('flipped');
+    $('#field IMG').attr('src', 'images/back.png')
+    $('#field IMG').removeClass('match');
+    cards = shuffle(cards);
+    $('#field IMG').each(function(counter) {
+    $(this).data('card',cards[counter])
+    $(this).attr('src',$(this).data('card'));
+});
+
+setTimeout(function() {
+                    $('#field IMG').attr("src","Images/back.png")
+                },1500);
+
+
+    
+    
+    
 }
 
 function shuffle(array) {
@@ -75,5 +96,9 @@ function shuffle(array) {
   return array;
 }
 
+
+
+//If number of cards on screen =0, then bring all cards back. Else, keep playing. 
+
 // add #field to all references of IMG 
-// homework - make the image disapear and then appear when you win
+// homework - put silhouette in place of image once it disapears and find happy gif for the victory
