@@ -27,7 +27,8 @@ $(document).ready(function() {
             if($('.flipped').eq(0).data('card') == $('.flipped').eq(1).data('card')) {
                 $(".flipped").addClass('match');
                 setTimeout(function() {
-                    $(".flipped").hide();
+                    $('.flipped').attr('src','Images/silhouette.png')
+                    $(".flipped").removeClass("match");
                     $(".flipped").removeClass("flipped");
                     checkWin();
                 },600);
@@ -35,7 +36,7 @@ $(document).ready(function() {
             else {
                 $(".flipped").addClass('fail');
                 setTimeout(function() {
-                    $('#field IMG').attr("src","Images/back.png")
+                    $('#field IMG').not('[src="Images/silhouette.png"]').attr("src","Images/back.png")
                     $(".flipped").removeClass('fail');
                     $(".flipped").removeClass("flipped");
                 },600);
@@ -45,17 +46,20 @@ $(document).ready(function() {
 });
 
 function checkWin() {
-    if($("#field IMG:visible").length == 0) {
+    if($("#field IMG:visible").not('[src="Images/silhouette.png"]').length == 0) {
+        $('[src="Images/silhouette.png"]').hide();
         $('#winner').show();
+        $('BODY').addClass ('confetti');
         setTimeout(function() {
         if(confirm('YOU PUT YOURSELF IN THE MONDAY MILK! Do you wish to continue to the Tuesday Juice?')) {
             resetField();
             }
-        }, 1000);  
+        }, 1500);  
     }
 }
 
 function resetField() {
+    $('BODY').removeClass('confetti');
     $('#winner').hide();
     $('#field IMG').show();
     $('.flipped').removeClass('flipped');
@@ -96,9 +100,6 @@ function shuffle(array) {
   return array;
 }
 
-
-
-//If number of cards on screen =0, then bring all cards back. Else, keep playing. 
-
+ 
 // add #field to all references of IMG 
-// homework - put silhouette in place of image once it disapears and find happy gif for the victory
+// homework - put silhouette in place of image once it disapears and find happy gif for the victory & commit to master.

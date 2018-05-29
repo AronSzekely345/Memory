@@ -34,8 +34,12 @@ IMG{
     height:180px;
 }
 
-Yay image id {
+#winner {
     position: absolute;
     top: 50px;
     left: 20%;
+}
+
+.confetti {
+    background:url('Images/confetti.gif');
 }
