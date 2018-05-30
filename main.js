@@ -17,6 +17,10 @@ cards[11] = "Images/six-spades.png";
 resetField();
 
 $(document).ready(function() {
+    if(localStorage.score != undefined) {
+        score = localStorage.score;
+        $('#score').text(score);
+    }
     $('#field IMG').click(function(){
         if($('.flipped').length > 1) {
             return false;
@@ -52,6 +56,7 @@ function checkWin() {
         $('#winner').show();
         $('BODY').addClass ('confetti');
         score++;
+        localStorage.score = score;
         $('#score').text(score);
         setTimeout(function() {
         if(confirm('YOU PUT YOURSELF IN THE MONDAY MILK! Do you wish to continue to the Tuesday Juice?')) {
