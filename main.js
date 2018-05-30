@@ -51,6 +51,8 @@ function checkWin() {
         $('[src="Images/silhouette.png"]').hide();
         $('#winner').show();
         $('BODY').addClass ('confetti');
+        score++;
+        $('#score').text(score);
         setTimeout(function() {
         if(confirm('YOU PUT YOURSELF IN THE MONDAY MILK! Do you wish to continue to the Tuesday Juice?')) {
             resetField();

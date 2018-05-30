@@ -8,6 +8,11 @@
     to {border-color: #f00;}
 }
 
+BODY {
+    text-align: center;
+    
+}
+
 IMG{
     padding: 5px;
 }
